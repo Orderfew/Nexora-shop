@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexora — Tableau de bord</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070b14;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 24px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #5962ff, #08c9ed);
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    h1, h2, p {
+      margin: 0;
+    }
+
+    .brand p {
+      color: #8993a8;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .profile {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #182238;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9daaff;
+      font-weight: bold;
+    }
+
+    .welcome {
+      margin-bottom: 25px;
+    }
+
+    .welcome h2 {
+      font-size: 28px;
+      margin-bottom: 7px;
+    }
+
+    .welcome p {
+      color: #8993a8;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: #0e1320;
+      border: 1px solid #202a40;
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    .card .label {
+      color: #8993a8;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .card .value {
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .card .change {
+      color: #55d6a0;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .section {
+      background: #0e1320;
+      border: 1px solid #202a40;
+      border-radius: 22px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-header h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .see-all {
+      color: #8290ff;
+      font-size: 13px;
+    }
+
+    .orders {
+      display: grid;
+      gap: 12px;
+    }
+
+    .order {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background: #090f1c;
+      border-radius: 14px;
+    }
+
+    .order-left {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .order-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: #18213a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .order-name {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .order-date {
+      color: #707b91;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .status {
+      padding: 6px 10px;
+      border-radius: 20px;
+      background: #102a24;
+      color: #55d6a0;
+      font-size: 11px;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .action {
+      padding: 18px;
+      background: #090f1c;
+      border: 1px solid #202a40;
+      border-radius: 15px;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .action span {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 9px;
+    }
+
+    .activity {
+      display: grid;
+      gap: 15px;
+    }
+
+    .activity-item {
+      display: flex;
+      justify-content: space-between;
+      color: #aeb7c9;
+      font-size: 13px;
+    }
+
+    .activity-item strong {
+      color: white;
+    }
+
+    @media (max-width: 800px) {
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 16px;
+      }
+
+      .cards {
+        gap: 10px;
+      }
+
+      .card {
+        padding: 15px;
+      }
+
+      .card .value {
+        font-size: 21px;
+      }
+
+      .welcome h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <header>
+      <div class="brand">
+        <div class="logo">N</div>
+
+        <div>
+          <h1>Nexora</h1>
+          <p>Espace vendeur</p>
+        </div>
+      </div>
+
+      <div class="profile">JN</div>
+    </header>
+
+    <div class="welcome">
+      <h2>Bonjour 👋</h2>
+      <p>Voici un aperçu de votre boutique aujourd'hui.</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="label">Chiffre d'affaires</div>
+        <div class="value">0 FCFA</div>
+        <div class="change">Aujourd'hui</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Commandes</div>
+        <div class="value">0</div>
+        <div class="change">Aujourd'hui</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Produits</div>
+        <div class="value">0</div>
+        <div class="change">Dans votre boutique</div>
+      </div>
+
+      <div class="card">
+        <div class="label">Clients</div>
+        <div class="value">0</div>
+        <div class="change">Clients enregistrés</div>
+      </div>
+
+    </div>
+
+    <section class="section">
+
+      <div class="section-header">
+        <h3>Commandes récentes</h3>
+        <span class="see-all">Voir tout</span>
+      </div>
+
+      <div class="orders">
+
+        <div class="order">
+          <div class="order-left">
+            <div class="order-icon">🛒</div>
+
+            <div>
+              <div class="order-name">Aucune commande</div>
+              <div class="order-date">Vos nouvelles commandes apparaîtront ici</div>
+            </div>
+          </div>
+
+          <div class="status">En attente</div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="bottom-grid">
+
+      <section class="section">
+
+        <div class="section-header">
+          <h3>Actions rapides</h3>
+        </div>
+
+        <div class="quick-actions">
+
+          <a class="action" href="#">
+            <span>📦</span>
+            Ajouter un produit
+          </a>
+
+          <a class="action" href="#">
+            <span>🛒</span>
+            Nouvelle commande
+          </a>
+
+          <a class="action" href="#">
+            <span>👥</span>
+            Ajouter un client
+          </a>
+
+          <a class="action" href="#">
+            <span>💰</span>
+            Voir les paiements
+          </a>
+
+        </div>
+
+      </section>
+
+      <section class="section">
+
+        <div class="section-header">
+          <h3>Activité</h3>
+        </div>
+
+        <div class="activity">
+
+          <div class="activity-item">
+            <span>Boutique créée</span>
+            <strong>Maintenant</strong>
+          </div>
+
+          <div class="activity-item">
+            <span>Produits</span>
+            <strong>0</strong>
+          </div>
+
+          <div class="activity-item">
+            <span>Commandes</span>
+            <strong>0</strong>
+          </div>
+
+          <div class="activity-item">
+            <span>Clients</span>
+            <strong>0</strong>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
